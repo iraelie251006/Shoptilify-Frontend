@@ -1,14 +1,13 @@
-import React from 'react'
-import Card from './Card'
+import Cards from './Cards'
 
-const CardContainer = ({products, show}) => {
+const CardContainer = ({products, details}) => {
   return (
     <div className='py-5 ' id='shop'>
         <h2 className='text-center text-4xl font-semibold'>Our Products</h2>
         <div className='px-4 lg:px-5 mt-10 mx-auto max-w-screen-lg py-5'>
             <div className='flex gap-8 flex-wrap justify-center'>
               {products.map((product) => (
-               <Card key={product.id} product={product} show={show}/> 
+               <Cards key={product.id} product={product} detail={details}/> 
               ))}
               
             </div>
