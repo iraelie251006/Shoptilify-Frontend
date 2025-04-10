@@ -2,9 +2,8 @@ import { BASE_URL } from "@/api/api"
 import Image from "next/image"
 import { FaHeart, FaRegHeart } from "react-icons/fa6"
 import { useState } from "react"
-import Link from "next/link"
 
-const Cards = ({product, details}) => {
+const Cards = ({product}) => {
     const [isFilled, setIsFilled] = useState(false)
 
     const toggleHeart = () => {

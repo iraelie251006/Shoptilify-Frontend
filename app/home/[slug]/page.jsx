@@ -1,10 +1,37 @@
 "use client"
-import Image from "next/image"
+import api, { BASE_URL } from '@/api/api';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import Image from 'next/image';
+import { useParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 
-export default function ProductDetailPage() {
+export default function PostPage() {
+  const {slug} = useParams();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await api.get(`product_detail/${slug}`);
+        console.log(data)
+        setProduct(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [slug]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Main Product Section */}
@@ -12,27 +39,23 @@ export default function ProductDetailPage() {
         {/* Product Image */}
         <div className="relative overflow-hidden rounded-md bg-black">
           <Image
-            src="hamburger.svg"
-            alt="Gucci Brown Shoe"
+            src={`${BASE_URL}${product.data.image}`}
+            alt={`${product.data.slug}`}
             width={600}
             height={600}
             className="h-auto w-full object-contain"
+            quality={100}
           />
         </div>
 
         {/* Product Details */}
         <div className="flex flex-col justify-center">
-          <h1 className="mb-2 text-4xl font-bold text-gray-900"></h1>
-          <p className="mb-6 text-2xl font-semibold text-gray-900">$200.00</p>
+          <h1 className="mb-2 text-4xl font-bold text-gray-900">{product.data.name}</h1>
+          <p className="mb-6 text-2xl font-semibold text-gray-900">${product.data.price}</p>
 
           <div className="mb-8 space-y-4 text-gray-700">
             <p>
-              Complete your outfit with this elegant Gucci Shoe in rich brown leather. Featuring the brand&apos;s signature
-              GG buckle, this shoe combines luxury with practicality, making it a versatile accessory for any occasion.
-            </p>
-            <p>
-              Whether you&apos;re dressing up for a formal event or adding a designer touch to casual wear, this shoe is a
-              standout.
+              {product.data.description}
             </p>
           </div>
 
@@ -111,6 +134,5 @@ export default function ProductDetailPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-
