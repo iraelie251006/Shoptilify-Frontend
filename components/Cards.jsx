@@ -12,7 +12,7 @@ const Cards = ({product, details}) => {
     }
   return (
     <>
-     <Link href={`product_detail/${details.slug}`} className="max-w-sm rounded-lg shadow-2xl w-[200px] ">
+     <div className="max-w-sm rounded-lg shadow-2xl w-[200px] ">
         <Image src={`${BASE_URL}${product.image}`} className="rounded-t-lg" alt="Card image" width={200} height={200}/>
         <div className="p-4">
             <h5 className="text-xl font-semibold">{`${product.name}`}</h5>
@@ -22,7 +22,7 @@ const Cards = ({product, details}) => {
             </div>
             
         </div>
-    </Link>
+    </div>
     </>
   )
 }
