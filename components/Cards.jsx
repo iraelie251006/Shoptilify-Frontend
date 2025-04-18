@@ -2,8 +2,9 @@ import { BASE_URL } from "@/api/api"
 import Image from "next/image"
 import { FaHeart, FaRegHeart } from "react-icons/fa6"
 import { useState } from "react"
+import Link from "next/link"
 
-const Cards = ({product}) => {
+const Cards = ({product, slug}) => {
     const [isFilled, setIsFilled] = useState(false)
 
     const toggleHeart = () => {
@@ -11,7 +12,7 @@ const Cards = ({product}) => {
     }
   return (
     <>
-     <div className="max-w-sm rounded-lg shadow-2xl w-[200px] ">
+     <Link href={`/home/${slug}`} className="max-w-sm rounded-lg shadow-2xl w-[200px] ">
         <Image src={`${BASE_URL}${product.image}`} className="rounded-t-lg" alt="Card image" width={200} height={200}/>
         <div className="p-4">
             <h5 className="text-xl font-semibold">{`${product.name}`}</h5>
@@ -19,9 +20,8 @@ const Cards = ({product}) => {
               <p className="text-gray-700">{`$${product.price}`}</p>
               <span onClick={toggleHeart}>{isFilled ? <FaHeart color="red" /> : <FaRegHeart/>}</span>
             </div>
-            
         </div>
-    </div>
+    </Link>
     </>
   )
 }

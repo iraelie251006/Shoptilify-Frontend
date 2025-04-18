@@ -1,17 +1,12 @@
-
-
 import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
 import Image from "next/image"
-import Link from "next/link"
 import { FaCartShopping } from "react-icons/fa6"
 
 export function SheetDemo() {

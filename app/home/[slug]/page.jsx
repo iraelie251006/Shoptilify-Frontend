@@ -43,7 +43,7 @@ export default function PostPage() {
             alt={`${product.data.slug}`}
             width={600}
             height={600}
-            className="h-auto w-full object-contain"
+            className="h-auto w-full object-cover"
             quality={100}
           />
         </div>
@@ -59,20 +59,21 @@ export default function PostPage() {
             </p>
           </div>
 
-          <Button className="w-fit">Add to cart</Button>
+          <Button className="w-fit bg-white text-slate-900 hover:text-white shadow-xl font-semibold">Add to cart</Button>
         </div>
       </div>
 
       {/* Related Products Section */}
       <div>
-        <h2 className="mb-6 text-3xl font-bold text-gray-900">Related products</h2>
+        <h2 className="mb-8 text-3xl font-bold text-gray-900 text-center">Related products</h2>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {/* Rolex Watch */}
-          <Card className="overflow-hidden">
+          {product.data.similar_products?.map((item) => (
+            <Card className="overflow-hidden" key={item.id}>
             <div className="aspect-square bg-gray-100">
               <Image
-                src="/placeholder.svg?height=300&width=300"
+                src={`${BASE_URL}${item.image}`}
                 alt="Rolex Wrist Watch"
                 width={300}
                 height={300}
@@ -80,57 +81,10 @@ export default function PostPage() {
               />
             </div>
             <CardContent className="p-4 text-center">
-              <h3 className="font-medium">Rolex Wrist</h3>
+              <h3 className="font-medium">{item.name}</h3>
             </CardContent>
           </Card>
-
-          {/* Gucci Bag */}
-          <Card className="overflow-hidden">
-            <div className="aspect-square bg-gray-100">
-              <Image
-                src="/placeholder.svg?height=300&width=300"
-                alt="Gucci Bag"
-                width={300}
-                height={300}
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <CardContent className="p-4 text-center">
-              <h3 className="font-medium">Gucci Bag</h3>
-            </CardContent>
-          </Card>
-
-          {/* AllStars Pair */}
-          <Card className="overflow-hidden">
-            <div className="aspect-square bg-gray-100">
-              <Image
-                src="/placeholder.svg?height=300&width=300"
-                alt="AllStars Pair"
-                width={300}
-                height={300}
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <CardContent className="p-4 text-center">
-              <h3 className="font-medium">AllStars Pair</h3>
-            </CardContent>
-          </Card>
-
-          {/* Nike Pair */}
-          <Card className="overflow-hidden">
-            <div className="aspect-square bg-gray-100">
-              <Image
-                src="/placeholder.svg?height=300&width=300"
-                alt="Nike Pair"
-                width={300}
-                height={300}
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <CardContent className="p-4 text-center">
-              <h3 className="font-medium">Nike Pair</h3>
-            </CardContent>
-          </Card>
+          ))}
         </div>
       </div>
     </div>
